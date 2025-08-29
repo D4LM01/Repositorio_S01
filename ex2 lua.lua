@@ -1,16 +1,21 @@
-io.write("Digite o valor de M (início do intervalo): ")
-local M = tonumber(io.read())
-
-io.write("Digite o valor de N (fim do intervalo): ")
-local N = tonumber(io.read())
-
-io.write("Digite o valor de X (número base dos múltiplos): ")
-local X = tonumber(io.read())
-
-print("\nMúltiplos de " .. X .. " no intervalo de " .. M .. " até " .. N .. ":")
-
-for i = M, N do
-    if i % X == 0 then
-        print(i)
+function maiorNumero(tabela)
+    local maior = tabela[1] 
+    for i = 2, #tabela do  
+        if tabela[i] > maior then
+            maior = tabela[i]
+        end
     end
+    return maior
 end
+
+io.write("Quantos números deseja inserir? ")
+local qtd = tonumber(io.read())
+
+local numeros = {}
+
+for i = 1, qtd do
+    io.write("Digite o número " .. i .. ": ")
+    numeros[i] = tonumber(io.read())
+end
+
+print("\nO maior número da tabela é: " .. maiorNumero(numeros))
