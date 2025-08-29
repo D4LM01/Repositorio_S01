@@ -1,27 +1,30 @@
-function filtrarPares(tabela)
-    local pares = {}
-    for i = 1, #tabela do
-        if tabela[i] % 2 == 0 then
-            table.insert(pares, tabela[i]) 
+function calculadora(a, b, operador)
+    if operador == "+" then
+        return a + b
+    elseif operador == "-" then
+        return a - b
+    elseif operador == "*" then
+        return a * b
+    elseif operador == "/" then
+        if b ~= 0 then
+            return a / b
+        else
+            return "Erro: divisão por zero!"
         end
+    else
+        return "Erro: operador inválido!"
     end
-    return pares
 end
 
-io.write("Quantos números deseja inserir? ")
-local qtd = tonumber(io.read())
+io.write("Digite o primeiro número: ")
+local n1 = tonumber(io.read())
 
-local numeros = {}
+io.write("Digite o segundo número: ")
+local n2 = tonumber(io.read())
 
-for i = 1, qtd do
-    io.write("Digite o número " .. i .. ": ")
-    numeros[i] = tonumber(io.read())
-end
+io.write("Digite o operador (+, -, * ou /): ")
+local op = io.read()
 
-local pares = filtrarPares(numeros)
+local resultado = calculadora(n1, n2, op)
 
-print("\nNúmeros pares encontrados:")
-for i = 1, #pares do
-    io.write(pares[i] .. " ")
-end
-print()
+print("Resultado: " .. resultado)
