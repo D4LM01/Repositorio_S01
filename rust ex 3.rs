@@ -1,42 +1,33 @@
 use std::io;
 
-fn verificar_senha(senha: &str) -> bool {
-    if senha.len() < 8 {
-        return false;
+fn imprimir_tabuada(numero: i32, limite_inferior: i32, limite_superior: i32) {
+    for i in limite_inferior..=limite_superior {
+        println!("{} x {} = {}", numero, i, numero * i);
     }
-
-    let mut tem_numero = false;
-    let mut tem_maiuscula = false;
-
-    for c in senha.chars() {
-        if c.is_ascii_digit() {
-            tem_numero = true;
-        }
-        if c.is_ascii_uppercase() {
-            tem_maiuscula = true;
-        }
-    }
-
-    tem_numero && tem_maiuscula
 }
 
 fn main() {
-    loop {
-        println!("Digite uma senha:");
+    // Número da tabuada
+    println!("Digite o número da tabuada:");
+    let mut entrada = String::new();
+    io::stdin().read_line(&mut entrada).expect("Erro ao ler entrada");
+    let numero: i32 = entrada.trim().parse().expect("Digite um número válido");
 
-        let mut senha = String::new();
-        io::stdin()
-            .read_line(&mut senha)
-            .expect("Erro ao ler entrada");
+    // Limite inferior
+    println!("Digite o limite inferior:");
+    entrada.clear();
+    io::stdin().read_line(&mut entrada).expect("Erro ao ler entrada");
+    let limite_inferior: i32 = entrada.trim().parse().expect("Digite um número válido");
 
-        // remove o '\n' do final
-        let senha = senha.trim();
+    // Limite superior
+    println!("Digite o limite superior:");
+    entrada.clear();
+    io::stdin().read_line(&mut entrada).expect("Erro ao ler entrada");
+    let limite_superior: i32 = entrada.trim().parse().expect("Digite um número válido");
 
-        if verificar_senha(senha) {
-            println!("Senha válida! Acesso concedido.");
-            break;
-        } else {
-            println!("Senha inválida! Tente novamente.");
-        }
+    if limite_inferior > limite_superior {
+        println!("Erro: o limite inferior não pode ser maior que o limite superior.");
+    } else {
+        imprimir_tabuada(numero, limite_inferior, limite_superior);
     }
 }
